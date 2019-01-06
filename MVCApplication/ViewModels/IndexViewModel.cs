@@ -9,8 +9,7 @@ namespace MVCApplication.ViewModels
     public class IndexViewModel
     {
 
-        [Required]
-        public double sidelength { get; set; }
+        public Dictionary<string, string> columns { get; set; }
 
     }
 

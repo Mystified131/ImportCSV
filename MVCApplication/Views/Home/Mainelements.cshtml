@@ -1,0 +1,33 @@
+﻿@model MVCApplication.ViewModels.MainelementsViewModel
+
+@{
+    ViewData["Title"] = "Mainelements";
+}
+
+<h2>Mainelements</h2>
+
+<h1>@ViewBag.title</h1>
+
+<h3>@ViewBag.elements.Count Result(s)</h3>
+
+<br />
+
+@foreach (var items in ViewBag.elements)
+{
+    <table>
+
+        <td>
+        <tr>
+
+            @foreach (KeyValuePair<string, string> item in items)
+            {
+                <p>@item.Key : @item.Value</p>
+            }
+
+        </tr>
+
+        </td>
+
+    </table>
+}
+

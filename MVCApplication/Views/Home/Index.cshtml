@@ -1,11 +1,13 @@
 ﻿@model MVCApplication.ViewModels.IndexViewModel
 
-@{
-    ViewData["Title"] = "Index";
-}
+<h1>Categories</h1>
+<h2>View All</h2>
+<ul>
+    @foreach (KeyValuePair<string, string> column in Model.columns)
+    {
+        <li>
+            <a asp-controller="List" asp-action="Values" asp-route-column="@column.Key">@column.Value</a>
+        </li>
+    }
+</ul>
 
-<h2>Home</h2>
-
-<p>Welcome to a simple MVC application that loads in data from a csv file and lists it.</p>
-
-<p>You can press the "All Data" link to see the data.</p>
