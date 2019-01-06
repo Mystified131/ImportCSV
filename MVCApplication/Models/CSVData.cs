@@ -10,7 +10,7 @@ namespace MVCApplication.Models
     public class CSVData
     {
 
-        static List<Dictionary<string, string>> AllJobs = new List<Dictionary<string, string>>();
+        static List<Dictionary<string, string>> AllElements = new List<Dictionary<string, string>>();
         static bool IsDataLoaded = false;
 
         public static List<Dictionary<string, string>> FindAll()
@@ -18,7 +18,7 @@ namespace MVCApplication.Models
             LoadData();
 
             // Bonus mission: return a copy
-            return new List<Dictionary<string, string>>(AllJobs);
+            return new List<Dictionary<string, string>>(AllElements);
         }
 
         /*
@@ -31,9 +31,9 @@ namespace MVCApplication.Models
 
             List<string> values = new List<string>();
 
-            foreach (Dictionary<string, string> job in AllJobs)
+            foreach (Dictionary<string, string> element in AllElements)
             {
-                string aValue = job[column];
+                string aValue = element[column];
 
                 if (!values.Contains(aValue))
                 {
@@ -54,9 +54,9 @@ namespace MVCApplication.Models
             // load data, if not already loaded
             LoadData();
 
-            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            List<Dictionary<string, string>> elements = new List<Dictionary<string, string>>();
 
-            foreach (Dictionary<string, string> row in AllJobs)
+            foreach (Dictionary<string, string> row in AllElements)
             {
 
                 foreach (string key in row.Keys)
@@ -65,7 +65,7 @@ namespace MVCApplication.Models
 
                     if (aValue.ToLower().Contains(value.ToLower()))
                     {
-                        jobs.Add(row);
+                        elements.Add(row);
 
                         // Finding one field in a job that matches is sufficient
                         break;
@@ -73,7 +73,7 @@ namespace MVCApplication.Models
                 }
             }
 
-            return jobs;
+            return elements;
         }
 
         /**
@@ -88,19 +88,19 @@ namespace MVCApplication.Models
             // load data, if not already loaded
             LoadData();
 
-            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            List<Dictionary<string, string>> elements = new List<Dictionary<string, string>>();
 
-            foreach (Dictionary<string, string> row in AllJobs)
+            foreach (Dictionary<string, string> row in AllElements)
             {
                 string aValue = row[column];
 
                 if (aValue.ToLower().Contains(value.ToLower()))
                 {
-                    jobs.Add(row);
+                    elements.Add(row);
                 }
             }
 
-            return jobs;
+            return elements;
         }
 
         /*
@@ -142,7 +142,7 @@ namespace MVCApplication.Models
 
                     rowDict.Add(headers[i], row[i]);
                 }
-                AllJobs.Add(rowDict);
+                AllElements.Add(rowDict);
             }
 
             IsDataLoaded = true;

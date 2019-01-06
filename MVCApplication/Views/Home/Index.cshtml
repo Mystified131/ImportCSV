@@ -1,13 +1,38 @@
-﻿@model MVCApplication.ViewModels.IndexViewModel
+﻿<head>
 
-<h1>Categories</h1>
-<h2>View All</h2>
-<ul>
-    @foreach (KeyValuePair<string, string> column in Model.columns)
-    {
-        <li>
-            <a asp-controller="List" asp-action="Values" asp-route-column="@column.Key">@column.Value</a>
-        </li>
-    }
-</ul>
+</head>
+<h1>Search</h1>
+
+
+<form action="Home/Results">
+    <h2>Search by:</h2>
+
+    <p>
+        @foreach (KeyValuePair<string, string> column in ViewBag.columns)
+        {
+            <span>
+                <input type="radio"
+                       name="searchType"
+                       id="@column.Key"
+                       value="@column.Key"
+                       checked="@column.Key == 'all''" />
+                <label for="@column.Key">@column.Value</label>
+            </span>
+        }
+    </p>
+
+    <p>
+        <label for="searchTerm">Keyword:</label>
+        <input type="text" name="searchTerm" id="searchTerm" />
+    </p>
+
+    <input type="submit" value="Search" />
+</form>
+
+<hr />
+
+
+
+
+
 

@@ -10,7 +10,6 @@ namespace MVCApplication.Controllers
 {
     public class HomeController : Controller
     {
-
         internal static Dictionary<string, string> columnChoices = new Dictionary<string, string>();
 
         // This is a "static constructor" which can be used
@@ -27,47 +26,60 @@ namespace MVCApplication.Controllers
 
         public IActionResult Index()
         {
-            IndexViewModel indexViewModel = new IndexViewModel();
-            indexViewModel.columns = columnChoices;
-            return View(indexViewModel);
+
+            ViewBag.columns = columnChoices;
+
+            return View();
+
+
         }
 
         public IActionResult Values(string column)
         {
-            column = "all";
+
             ValuesViewModel valuesViewModel = new ValuesViewModel();
 
-            if (column.Equals("all"))
-            {
 
-                    List<Dictionary<string, string>> elements = CSVData.FindAll();
+            List<Dictionary<string, string>> elements = CSVData.FindAll();
 
-                    valuesViewModel.elements = elements;
+            valuesViewModel.elements = elements;
 
-                    return View(valuesViewModel);
-                }
-        
-            else
-            {
-       
-                List<string> items = CSVData.FindAll(column);
-
-                valuesViewModel.column = column;
-                valuesViewModel.items = items;
-
-                return View(valuesViewModel);
-            }
+            return View(valuesViewModel);
         }
 
-        public IActionResult Mainelements(string column, string value)
+
+        public IActionResult Results(string searchType, string searchTerm)
+
         {
-            MainelementsViewModel mainelementsViewModel = new MainelementsViewModel();
 
-            List<Dictionary<String, String>> mainelements = CSVData.FindByColumnAndValue(column, value);
-            mainelementsViewModel.mainelements = mainelements;
+            ViewBag.columns = columnChoices;
 
+            if (searchTerm == null)
 
-            return View(mainelementsViewModel);
+            {
+
+                return Redirect("/search");
+
+            }
+            {
+                if (searchType != "all")
+                {
+                    List<Dictionary<string, string>> elements = CSVData.FindByColumnAndValue(searchType, searchTerm);
+                    ViewBag.elements = elements;
+                    return View();
+                }
+
+                else
+                {
+                    List<Dictionary<string, string>> elements = CSVData.FindByValue(searchTerm);
+                    ViewBag.elements = elements;
+                    return View();
+
+                }
+            }
+
         }
+
     }
+
 }
