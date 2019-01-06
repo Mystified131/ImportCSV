@@ -1,0 +1,26 @@
+﻿@model MVCApplication.ViewModels.AllDataViewModel
+
+<h1>All Data</h1>
+
+<h3>@Model.elements.Count Result(s)</h3>
+
+<br />
+
+@foreach (var element in Model.elements)
+{
+    <table>
+
+        <td>
+        <tr>
+
+            @foreach (KeyValuePair<string, string> item in element)
+            {
+                <p>@item.Key : @item.Value</p>
+            }
+
+        </tr>
+
+        </td>
+
+    </table>
+}
