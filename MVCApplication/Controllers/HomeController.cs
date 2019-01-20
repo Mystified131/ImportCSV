@@ -58,7 +58,7 @@ namespace MVCApplication.Controllers
 
             {
 
-                return Redirect("/search");
+                return Redirect("/");
 
             }
             {
